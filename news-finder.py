@@ -51,7 +51,7 @@ def main(args):
     config.read(args.config)
     rss = config.get('basic_settings','rss_url')
     db = config.get('basic_settings','database')
-    flag = True if config.get('basic_settings','enable_post') == True else False
+    flag = True if config.get('basic_settings','enable_post') == 'True' else False
     url = config.get('rocket_chat','url')
     user = config.get('rocket_chat','user')
     password = config.get('rocket_chat','password')
