@@ -51,7 +51,7 @@ alias=News Finder
 icon=:newspaper:
 ```
 
-＃使い方
+## 使い方
 
 news-finder.py に 引数 `-c 設定ファイル` を指定して実行するだけ！
 
@@ -59,9 +59,35 @@ news-finder.py に 引数 `-c 設定ファイル` を指定して実行するだ
 $ python ./news-finder.py -c xxxxx.ini
 ```
 
-# 備考
+## 定期実行
 
-news-finderはデータベース(SQLite)に既知の記事を登録し、実行するたびに差分をチェックして
-新着記事があった時に、Rocket.Chatの任意のチャンネルに通知します。
+rocketchat-news-finderはデータベース(SQLite)に既知の記事を登録し、実行するたびに差分を
+チェックして新着記事があった時に、Rocket.Chatの任意のチャンネルに通知します。
 
 cronなどで定期的に実行するなどの使い方に向いています。
+
+### nf_crawler.sh
+
+rocketchat-news-finder/bin/ディレクトリ以下にnf_crawler.shという定期実行用スクリプトを
+収録しています。
+
+このnf_crawler.shは以下のような階層構造の元で、実行すると
+
+```
+rocketchat-news-finder/
+    bin/
+        nf_crawler.sh
+    repos/
+        $target_site1/
+            news_finder.ini
+            feed.db
+        $target_site2/
+        :
+    .news_finder.rc
+```
+
+.news_finder.rc(環境設定ファイル)を読み込んだ後、repos/ディレクトリ以下のディレクトリ
+(巡回対象ディレクトリ $target_site1、$target_site2...)内のnews_finder.ini(設定ファイル)を
+順番に読み込み実行していくツールです。
+
+スケジュール実行用スクリプトとしてご利用ください。
